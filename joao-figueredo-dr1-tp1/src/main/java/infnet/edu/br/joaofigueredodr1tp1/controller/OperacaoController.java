@@ -29,19 +29,19 @@ public class OperacaoController {
     @PostMapping("/subtracao")
     @Transactional
     public ResponseEntity<Double> subtracaoOperacao(@RequestBody @Valid OperacaoDTO operacaoDTO) {
-        return new ResponseEntity<>(operacaoService.adicaoOperacao(operacaoDTO), HttpStatus.OK);
+        return new ResponseEntity<>(operacaoService.subtracaoOperacao(operacaoDTO), HttpStatus.OK);
     }
 
     @PostMapping("/multiplicacao")
     @Transactional
     public ResponseEntity<Double> multiplicacaoOperacao(@RequestBody @Valid OperacaoDTO operacaoDTO) {
-        return new ResponseEntity<>(operacaoService.adicaoOperacao(operacaoDTO), HttpStatus.OK);
+        return new ResponseEntity<>(operacaoService.multiplicacaoOperacao(operacaoDTO), HttpStatus.OK);
     }
 
     @PostMapping("/divisao")
     @Transactional
     public ResponseEntity<Double> divisaoOperacao(@RequestBody @Valid OperacaoDTO operacaoDTO) {
-        return new ResponseEntity<>(operacaoService.adicaoOperacao(operacaoDTO), HttpStatus.OK);
+        return new ResponseEntity<>(operacaoService.divisaoOperacao(operacaoDTO), HttpStatus.OK);
     }
 
     @PostMapping("/exponenciacao")
