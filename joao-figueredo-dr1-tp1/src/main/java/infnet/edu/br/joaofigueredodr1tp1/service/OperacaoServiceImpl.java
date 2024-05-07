@@ -1,67 +1,39 @@
 package infnet.edu.br.joaofigueredodr1tp1.service;
 
-import infnet.edu.br.joaofigueredodr1tp1.domain.Operacao;
 import infnet.edu.br.joaofigueredodr1tp1.dto.OperacaoDTO;
 import infnet.edu.br.joaofigueredodr1tp1.repository.IOperacaoRepository;
-import jakarta.persistence.EntityNotFoundException;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
-public class OperacaoServiceImpl implements OperacaoService{
-
-    private ModelMapper modelMapper = new ModelMapper();
+public class OperacaoServiceImpl implements OperacaoService {
 
     @Autowired
     private IOperacaoRepository operacaoRepository;
-    
+
     @Override
-    public OperacaoDTO createOperacao(OperacaoDTO operacaoDTO) {
-        Operacao operacao = modelMapper.map(operacaoDTO, Operacao.class);
-        Operacao savedOperacao = operacaoRepository.save(operacao);
-        return modelMapper.map(savedOperacao, OperacaoDTO.class);
+    public Double adicaoOperacao(OperacaoDTO operacaoDTO) {
+        return operacaoDTO.getNum1() + operacaoDTO.getNum2();
     }
 
     @Override
-    public OperacaoDTO getOperacaoById(Long operacaoId) {
-        Operacao operacao = operacaoExistsByID(operacaoId);
-        return modelMapper.map(operacao, OperacaoDTO.class);
+    public Double subtracaoOperacao(OperacaoDTO operacaoDTO) {
+        return operacaoDTO.getNum1() - operacaoDTO.getNum2();
     }
 
     @Override
-    public OperacaoDTO updateOperacao(Long operacaoId, OperacaoDTO operacaoDTO) {
-        if (!operacaoRepository.existsById(operacaoId)) {
-            throw new EntityNotFoundException("Imóvel não encontrado com o ID: " + operacaoId);
-        }
-        operacaoDTO.setId(operacaoId);
-        Operacao updatedOperacao = operacaoRepository.save(modelMapper.map(operacaoDTO, Operacao.class));
-        return modelMapper.map(updatedOperacao, OperacaoDTO.class);
+    public Double multiplicacaoOperacao(OperacaoDTO operacaoDTO) {
+        return operacaoDTO.getNum1() * operacaoDTO.getNum2();
     }
 
     @Override
-    public void deleteOperacao(Long operacaoId) {
-        Operacao operacao = operacaoExistsByID(operacaoId);
-        operacaoRepository.delete(operacao);
+    public Double divisaoOperacao(OperacaoDTO operacaoDTO) {
+        return operacaoDTO.getNum1() / operacaoDTO.getNum2();
     }
 
     @Override
-    public List<OperacaoDTO> getOperacaoList() {
-        List<Operacao> operacaoList = operacaoRepository.findAll();
-        return operacaoList.stream()
-                .map(operacao -> modelMapper.map(operacao, OperacaoDTO.class))
-                .collect(Collectors.toList());
+    public Double exponenciacaoOperacao(OperacaoDTO operacaoDTO) {
+        return Math.pow(operacaoDTO.getNum1(), operacaoDTO.getNum2());
     }
-
-    private Operacao operacaoExistsByID(Long operacaoId) {
-        if (!operacaoRepository.existsById(operacaoId)) {
-            throw new EntityNotFoundException("Imóvel não encontrado com o ID: " + operacaoId);
-        }
-        return operacaoRepository.findById(operacaoId).get();
-    }
-
 
 }

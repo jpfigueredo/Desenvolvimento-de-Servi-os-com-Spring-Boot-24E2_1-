@@ -6,10 +6,12 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/operacoes")
@@ -18,31 +20,33 @@ public class OperacaoController {
     @Autowired
     private OperacaoService operacaoService;
 
-    @PostMapping
+    @PostMapping("/adicao")
     @Transactional
-    public ResponseEntity<OperacaoDTO> createOperacao(@RequestBody @Valid OperacaoDTO operacaoDTO) {
-        return new ResponseEntity<>(operacaoService.createOperacao(operacaoDTO), HttpStatus.CREATED);
+    public ResponseEntity<Double> adicaoOperacao(@RequestBody @Valid OperacaoDTO operacaoDTO) {
+        return new ResponseEntity<>(operacaoService.adicaoOperacao(operacaoDTO), HttpStatus.OK);
     }
 
-    @GetMapping
-    public ResponseEntity<List<OperacaoDTO>> getProperties() {
-        return new ResponseEntity<>(operacaoService.getOperacaoList(), HttpStatus.OK);
+    @PostMapping("/subtracao")
+    @Transactional
+    public ResponseEntity<Double> subtracaoOperacao(@RequestBody @Valid OperacaoDTO operacaoDTO) {
+        return new ResponseEntity<>(operacaoService.adicaoOperacao(operacaoDTO), HttpStatus.OK);
     }
 
-    @GetMapping("/{operacaoId}")
-    public ResponseEntity<OperacaoDTO> getOperacaoById(@PathVariable Long operacaoId) {
-        return new ResponseEntity<>(operacaoService.getOperacaoById(operacaoId), HttpStatus.OK);
+    @PostMapping("/multiplicacao")
+    @Transactional
+    public ResponseEntity<Double> multiplicacaoOperacao(@RequestBody @Valid OperacaoDTO operacaoDTO) {
+        return new ResponseEntity<>(operacaoService.adicaoOperacao(operacaoDTO), HttpStatus.OK);
     }
 
-    @PutMapping("/{operacaoId}")
-    public ResponseEntity<OperacaoDTO> updateOperacao(@PathVariable Long operacaoId, @RequestBody OperacaoDTO operacaoDto) {
-        OperacaoDTO updatedOperacao = operacaoService.updateOperacao(operacaoId, operacaoDto);
-        return new ResponseEntity<>(updatedOperacao, HttpStatus.OK);
+    @PostMapping("/divisao")
+    @Transactional
+    public ResponseEntity<Double> divisaoOperacao(@RequestBody @Valid OperacaoDTO operacaoDTO) {
+        return new ResponseEntity<>(operacaoService.adicaoOperacao(operacaoDTO), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{operacaoId}")
-    public void deleteOperacao(@PathVariable Long operacaoId) {
-        operacaoService.deleteOperacao(operacaoId);
+    @PostMapping("/exponenciacao")
+    @Transactional
+    public ResponseEntity<Double> exponenciacaoOperacao(@RequestBody @Valid OperacaoDTO operacaoDTO) {
+        return new ResponseEntity<>(operacaoService.exponenciacaoOperacao(operacaoDTO), HttpStatus.OK);
     }
-
 }
