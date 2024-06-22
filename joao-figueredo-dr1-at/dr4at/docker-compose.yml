@@ -8,6 +8,9 @@ services:
       - "27017:27017"
     volumes:
       - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: adminpassword
 
   app:
     build: .
@@ -17,7 +20,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      SPRING_DATA_MONGODB_URI: mongodb://mongodb:27017/mongo
+      SPRING_DATA_MONGODB_URI: mongodb://admin:adminpassword@mongodb:27017/mongo
 
 volumes:
   mongo-data:

@@ -20,7 +20,7 @@ public class AuthController {
     @GetMapping
     public ResponseEntity<List<Usuario>> getAllUsuarios() {
         try {
-            return ResponseEntity.status(HttpStatus.CREATED).body(service.getAll());
+            return ResponseEntity.status(HttpStatus.FOUND).body(service.getAll());
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

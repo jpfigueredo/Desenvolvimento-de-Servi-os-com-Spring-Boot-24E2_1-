@@ -86,13 +86,13 @@ public class AuthControllerTest {
 
         given(usuarioService.update(anyString(), any(Usuario.class))).willReturn(usuario);
 
-        Usuario updatedUsuario = new Usuario("1", "testtest", "testtest@test.com", "senha2", "ROLE_ADMIN");
+        Usuario updatedUsuario = new Usuario("1", "test", "testtest@test.com", "senha2", "ROLE_ADMIN");
 
         mockMvc.perform(put("/api/auth/1")
                         .with(csrf().asHeader())
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(updatedUsuario)))
-                .andExpect(status().isAccepted())
+                .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.nome").value(updatedUsuario.getNome()));
     }
@@ -102,7 +102,7 @@ public class AuthControllerTest {
     public void testDeleteUsuario() throws Exception {
         mockMvc.perform(delete("/api/auth/1")
                         .with(csrf().asHeader()))
-                .andExpect(status().isAccepted());
+                .andExpect(status().isNoContent());
     }
 
 }
