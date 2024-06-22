@@ -17,8 +17,8 @@ public class CustomUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findUsuarioByEmail(username);
-        if(usuario == null) {
-            throw  new UsernameNotFoundException("Usuário não cadastrado!");
+        if (usuario == null) {
+            throw new UsernameNotFoundException("Usuário não cadastrado!");
         }
         return new org.springframework.security.core.userdetails.User(usuario.getNome(), usuario.getSenha(),
                 Collections.singletonList(new SimpleGrantedAuthority(usuario.getPapel())));

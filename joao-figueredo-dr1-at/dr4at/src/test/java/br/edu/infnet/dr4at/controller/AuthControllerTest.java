@@ -13,7 +13,6 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.Arrays;
-import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -43,7 +42,7 @@ public class AuthControllerTest {
         given(usuarioService.getAll()).willReturn(Arrays.asList(usuario1, usuario2));
 
         mockMvc.perform(get("/api/auth"))
-                .andExpect(status().isCreated()) // Change to isOk()
+                .andExpect(status().isFound())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$[0].nome").value(usuario1.getNome()))
                 .andExpect(jsonPath("$[1].nome").value(usuario2.getNome()));

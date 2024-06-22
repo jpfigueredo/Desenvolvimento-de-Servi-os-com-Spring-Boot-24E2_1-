@@ -3,7 +3,6 @@ package br.edu.infnet.dr4at.service;
 import br.edu.infnet.dr4at.model.Usuario;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UsuarioService {
     List<Usuario> getAll();

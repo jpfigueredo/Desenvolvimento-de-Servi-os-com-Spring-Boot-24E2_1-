@@ -50,7 +50,8 @@ public class SecurityConfig {
                         .requestMatchers(("/h2-console/**")).permitAll()
                         .anyRequest().authenticated()
                 )
-                .httpBasic(httpBasic -> {});
+                .httpBasic(httpBasic -> {
+                });
         return http.build();
     }
 }
